@@ -104,7 +104,34 @@ def test_3():
     print(my_sort(example_list))
 
 
+def my_reverse_2(l):
+    for i in range(int(len(l)/2)):
+        # i swap len(l)-1-i
+        temp = l[i]
+        l[i] = l[len(l)-1-i]
+        l[len(l)-1-i] = temp
+    return l
 
+def test_4():
+    new_list = [1, 2, 3, 4]
+    print(my_reverse_2(new_list))
+
+
+
+"""def my_swap(x, y):
+    tmp = x
+    x = y
+    y = tmp
+    #return [x, y]
+
+def test_4():
+    m = 3
+    n = 9
+    my_swap(m, n)
+    print('m swap n')
+    #print(my_swap(x, y))
+    print(m)
+    print(n)"""
 
 
 if __name__ == '__main__':
@@ -113,3 +140,4 @@ if __name__ == '__main__':
     #my_reverse_list()
     #test_2()
     test_3()
+    test_4()
