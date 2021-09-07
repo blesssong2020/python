@@ -58,7 +58,8 @@ def my_file_processing():
             result_dict.update(new_dict)
             word_freq.pop(new_key)
         print("length of new sorted dictionary:", len(result_dict))
-        print(result_dict)
+        print("length of used word_freq dictionary:", len(word_freq))
+        print("sorted dictionary:", result_dict)
 
     with open("result.txt", "w") as f_2:
         for item in word_freq.items():
