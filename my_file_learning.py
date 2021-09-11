@@ -32,6 +32,20 @@ def my_copy():
         print("="*40)
         print(f_2.readlines())
 
+
+def my_max_item_dictionary(dict):
+    key_list = list(dict.keys())
+    value_list = list(dict.values())
+    value_temp = value_list[0]
+    key_temp = key_list[0]
+    for i in range(1,len(value_list)):
+        if value_list[i] > value_temp:
+            value_temp = value_list[i]
+            key_temp = key_list[i]
+    return {key_temp: value_temp}
+
+
+
 def my_file_processing():
     with open("sample.txt", "r") as f:
         lines = f.readlines()
@@ -51,15 +65,13 @@ def my_file_processing():
 
         result_dict = {}
         while len(word_freq) > 0:
-            min_val = min(word_freq.values())
-            new_key = list(word_freq.keys())[list(word_freq.values()).index(min_val)]
-            #result_dict[new_key] = min_val
-            new_dict = {new_key:min_val}
-            result_dict.update(new_dict)
-            word_freq.pop(new_key)
-        print("length of new sorted dictionary:", len(result_dict))
-        print("length of used word_freq dictionary:", len(word_freq))
+            item = my_max_item_dictionary(word_freq)
+            result_dict.update(item)
+            word_freq.pop(list(item.keys())[0])
+
         print("sorted dictionary:", result_dict)
+
+
 
     with open("result.txt", "w") as f_2:
         for item in word_freq.items():
