@@ -57,6 +57,52 @@ def plusOne(digits):
         new_list.append(0)
         return new_list
 
+
+def recursive_reverse_list(l, i=0):
+    if i > int(len(l)/2):
+        return l
+    else:
+        temp_value = l[i]
+        l[i] = l[-(i+1)]
+        l[-(i+1)] = temp_value
+        new_list = recursive_reverse_list(l, i+1)
+        return new_list
+
+
+def test_1():
+    my_list = [1, 2, 3, 4, 5]
+    print(recursive_reverse_list(my_list, 0))
+
+
+def max_list(l):
+    if len(l) == 1:
+        return l[0]
+    else:
+        if l[0] > max_list(l[1:]):
+            return l[0]
+        else:
+            return max_list(l[1:])
+
+
+def recursive_2(l):
+    if len(l) < 2:
+        return l
+    else:
+        l2 = l[1:-1]
+        print("12,", 12)
+        l3 = recursive_reverse_list(l2)
+        print("l3", l3)
+        la = []
+        la.append(l[-1])
+        la.extend(l3)
+        la.append(l[0])
+        print("la,", la)
+        return la
+
+
+
+
+
 if __name__ == '__main__':
     #my_first_function([1, 2, 3, 4], [1,2], ("H","L"))
     #print(my_funciton_2(-1, 100, 2))
@@ -65,5 +111,5 @@ if __name__ == '__main__':
     #print(my_recursive(3))
     #print(my_fibonacci(10))
     #print(my_print_fibo(100))
-    print(plusOne([8, 9, 9]))
-
+    #print(plusOne([8, 9, 9, 9]))
+    test_1()
