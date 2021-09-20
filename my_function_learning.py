@@ -65,12 +65,12 @@ def recursive_reverse_list(l, i=0):
         temp_value = l[i]
         l[i] = l[-(i+1)]
         l[-(i+1)] = temp_value
-        new_list = recursive_reverse_list(l, i+1)
-        return new_list
+        return recursive_reverse_list(l, i+1)
+
 
 
 def test_1():
-    my_list = [1, 2, 3, 4, 5]
+    my_list = [1, 2, 3, 4, 5, 10]
     print(recursive_reverse_list(my_list, 0))
 
 
