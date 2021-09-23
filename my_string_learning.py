@@ -65,7 +65,7 @@ def my_alter_function(s):
         if x in dict.keys():
             dict[x] += 1
         else:
-            dict[x] = 0
+            dict[x] = 1
 
     for i in range(len(s)):
         if dict[s[i]] == 1:
@@ -79,7 +79,7 @@ def my_dict():
 
 
 
-def my_
+
 
 
 
