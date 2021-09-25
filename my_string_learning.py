@@ -77,6 +77,34 @@ def my_dict():
     dict["s"] += 1
     print(dict["s"])
 
+def leet_code_151(s):
+    # split string to words
+    # remove empty element in words list
+    # reverse element in words list
+    # join words by " "
+    # return
+
+    words = s.strip().split()
+    non_emp_words = []
+    for x in words:
+        if len(x) > 0:
+            non_emp_words.append(x)
+
+    non_emp_words.reverse()
+    #print(non_emp_words)
+
+    return " ".join(non_emp_words)
+
+def leet_125(s):
+    new_list =[]
+    for x in s:
+        if x.isalnum():
+            new_list.append(x.lower())
+
+    for i in range(int(len(new_list)/2)):
+        if new_list[i] != new_list[len(new_list)-1-i]:
+            return False
+    return True
 
 
 
@@ -92,4 +120,5 @@ if __name__ == '__main__':
     #change_uppercase("smart john")
     #print(my_final_function("aabbs"))
     #my_dict()
-    print(my_alter_function("aabbs"))
+    #print(my_alter_function("aabbs"))
+    print((leet_125("  1112211   ")))
