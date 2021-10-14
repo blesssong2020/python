@@ -38,7 +38,7 @@ def my_max_item_dictionary(dict):
     value_list = list(dict.values())
     value_temp = value_list[0]
     key_temp = key_list[0]
-    for i in range(1,len(value_list)):
+    for i in range(1, len(value_list)):
         if value_list[i] > value_temp:
             value_temp = value_list[i]
             key_temp = key_list[i]

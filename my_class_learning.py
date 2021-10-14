@@ -72,7 +72,7 @@ class matrix:
         for i in range(m):
             for j in range(n):
                 self.data[i][j] += c.data[i][j]
-
+"""
 c1 = matrix([[1,2],[3,4],[5,6]])
 c2 = matrix([[99,100],[1,1],[-3,-4]])
 for i in range(3):
@@ -83,3 +83,5 @@ for i in range(3):
     print(c1.get_row(i))
 
 #if __name__ == '__main__':
+
+"""
