@@ -107,12 +107,11 @@ def leet_125(s):
     return True
 
 def leet_443(s):
-    s = s + s[-1]
     new_string = ""
     new_list = []
     i = 0
     while i < len(s):
-        temp = 0
+        temp = 1
         current_str = s[i]
         while i+1 < len(s) and current_str == s[i+1]:
             temp += 1
@@ -124,7 +123,31 @@ def leet_443(s):
             new_string = new_string + current_str
     for x in new_string:
         new_list.append(x)
-    return new_list, new_string
+    return len(new_list), new_list
+
+def leet_443_2(l):
+    final_list = []
+    new_list = []
+    i = 0
+    new_str = ""
+    while i < len(l):
+        temp = 1
+        current_element = l[i]
+        while i+1 < len(l) and current_element == l[i+1]:
+            temp += 1
+            i += 1
+        i += 1
+        if temp > 1:
+            new_list.append(current_element)
+            new_list.append(str(temp))
+        else:
+            new_list.append(current_element)
+    for x in new_list:
+        new_str += x
+    for x in new_str:
+        final_list.append(x)
+    return len(final_list), final_list
+
 
 if __name__ == '__main__':
     #check_string_type()
@@ -134,4 +157,4 @@ if __name__ == '__main__':
     #my_dict()
     #print(my_alter_function("aabbs"))
     #print((leet_125("  1112211   ")))
-    print(leet_443("abbb"))
+    print(leet_443_2(["a","a","b","b","c","c","c","c","c","c","c","c","c","c","c","c"]))
