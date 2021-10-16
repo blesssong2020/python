@@ -126,7 +126,6 @@ def leet_443(s):
     return len(new_list), new_list
 
 def leet_443_2(l):
-    final_list = []
     new_list = []
     i = 0
     new_str = ""
@@ -144,10 +143,27 @@ def leet_443_2(l):
             new_list.append(current_element)
     for x in new_list:
         new_str += x
-    for x in new_str:
-        final_list.append(x)
-    return len(final_list), final_list
+    l = list(new_str)
+    return len(l)
 
+def leetcode443_correct(chars):
+    i = 0
+    new_str = ""
+    while i < len(chars):
+        temp = 1
+        current_element = chars[i]
+        while i+1 < len(chars) and current_element == chars[i+1]:
+            temp += 1
+            i += 1
+        i += 1
+        if temp > 1:
+            new_str = new_str + str(current_element) + str(temp)
+        else:
+            new_str = new_str + str(current_element)
+    for i in range(len(new_str)):
+        chars[i] = new_str[i]
+    chars = chars[0:len(new_str)]
+    return len(chars)
 
 if __name__ == '__main__':
     #check_string_type()
@@ -158,3 +174,4 @@ if __name__ == '__main__':
     #print(my_alter_function("aabbs"))
     #print((leet_125("  1112211   ")))
     print(leet_443_2(["a","a","b","b","c","c","c","c","c","c","c","c","c","c","c","c"]))
+    #print(leet_443("aabbcccccccccccccccccccccb"))
