@@ -23,6 +23,51 @@ print(emp1.get_email())
 emp1.change_email("archer@gmail.com")
 print(emp1.get_email())
 """
+# variable: class variable vs instance variable
+# method: instance method vs class method vs static method
+"""
+class employee:
+    company_name = "Microsoft"
+    employee_list = []
+
+    @classmethod
+    def get_company_name(cls):
+        return cls.company_name
+
+    @classmethod
+    def reset_company_name(cls, name):
+        cls.company_name = name
+
+    @staticmethod
+    def print(message):
+        print(message)
+
+
+    def __init__(self, first_name, last_name, salary):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.salary = salary
+        self.email = first_name + last_name + "@gmail.com"
+        self.employee_list.append(first_name+" "+last_name)
+        #company_name = first_name + " " + "Amazon"
+
+    def get_salary(self):
+        return self.salary
+    def set_salary(self, new_salary):
+        self.salary = new_salary
+tom = employee("Tom", "Wood", 20)
+jack = employee("jack", "johnson", 10000)
+jack.set_salary(1000000)
+#print(jack.employee_list)
+#print(tom.employee_list)
+#print(jack.company_name)
+print("1111------")
+#print(jack.get_company_name())
+#employee.reset_company_name("Facebook")
+#print(employee.get_company_name())
+employee.print("hello world")
+tom.print("print tom")
+"""
 
 """
 class complex:
@@ -52,7 +97,7 @@ print(c1.get_img())
 print(c2.get_real())
 """
 
-class matrix:
+"""class matrix:
     def __init__(self, data=[]):
         self.data = data
 
@@ -71,7 +116,7 @@ class matrix:
         n = len(self.data[0])
         for i in range(m):
             for j in range(n):
-                self.data[i][j] += c.data[i][j]
+                self.data[i][j] += c.data[i][j]"""
 """
 c1 = matrix([[1,2],[3,4],[5,6]])
 c2 = matrix([[99,100],[1,1],[-3,-4]])
@@ -85,3 +130,33 @@ for i in range(3):
 #if __name__ == '__main__':
 
 """
+
+
+# Access Control
+
+class employee_2:
+    company_name = "Amazon"
+
+    def __init__(self, salary, name):
+        self.salary = salary
+        self.name = name
+
+    def display_name(self):
+        print(self.name)
+
+    def name2(self):
+        print(self.name)
+
+    @classmethod
+    def change_company_name(cls, new_name):
+        cls.company_name = new_name
+
+
+emp1 = employee_2(10000, "Jack")
+emp3 = employee_2(8888, "Jenny")
+print(emp1.company_name)
+emp1.change_company_name("FB")
+print(employee_2.company_name)
+emp2 = employee_2(999, "Tom")
+print(emp2.company_name)
+print(emp3.company_name)
