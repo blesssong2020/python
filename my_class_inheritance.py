@@ -64,10 +64,12 @@ class Truck(Vehicle):
         self.printDetails()
         print("engine: ", self.engine)
 """
+
+
+"""
 class Engine:
     #def __init__(self):
     #    self.power = 0
-
     def SetPower(self, power):
         self.power = power
 
@@ -105,3 +107,92 @@ hyb2.SetPower("111")
 hyb2.SetTankCap("14gal")
 hyb2.SetCharge("14v")
 hyb2.printDetails()
+"""
+
+#abstract class
+class Object:
+    def __init__(self):
+        pass
+    def printDetails(self):
+        print("empty object")
+        pass
+
+class Vehicle(Object):
+    def __init__(self, color, model, year):
+        super().__init__()
+        self.color = color
+        self.model = model
+        self.year = year
+
+    def printDetails(self):
+        print("color: ", self.color)
+        print("model: ", self.model)
+        print("year: ", self.year)
+
+class Car(Vehicle):
+    def __init__(self, color, model, year, engine):
+        super().__init__( color, model, year)
+        #Vehicle.__init__( color, model, year)
+        self.engine = engine
+
+    def printDetails(self):
+        print("color: ", self.color)
+        print("model: ", self.model)
+        print("year: ", self.year)
+        print("engine: ", self.engine)
+
+def my_print(object):
+    print("#"*50)
+    object.printDetails()
+
+# abstract class
+
+
+cv = []
+#polymorphism: Overriding is about same method, same signature but different
+# classes connected through inheritance.
+v1 = Vehicle("blue", "zz", "1999")
+c1 = Car("red", "Rogue", "2017", "l2")
+o1 = Object()
+#v1.printDetails()
+#print("-")
+#c1.printDetails()
+
+cv.append(v1)
+cv.append(c1)
+cv.append(o1)
+
+
+from abc import ABC, abstractmethod
+class Shape(ABC):
+    #@abstractmethod
+    def __init__(self):
+        pass
+    @abstractmethod
+    def get_area(self):
+        pass
+
+    def print_sth(self):
+        pass
+
+class Square(Shape):
+    def __init__(self, length):
+        self.length = length
+    def get_area(self):
+        return self.length * self.length
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+    def get_area(self):
+        return 3.14 * self.radius * self.radius
+s1 = Square(2)
+circle_1 = Circle(10)
+
+print(s1.get_area())
+print(circle_1.get_area())
+
+def print_area(object):
+    object.get_area()
+
+
