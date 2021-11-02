@@ -2,6 +2,8 @@ import random
 import math
 random.seed(100)
 import time
+import numpy as np
+import statistics as st
 
 class Point:
     def __init__(self, x, y):
@@ -43,23 +45,114 @@ def find_two_points():
     return [min_dist, point_list[closest_pair[0]], point_list[closest_pair[1]]]
 
 
+
+
+
 """
-def my_leetcode_39(candidates, target):
+def helper(candidates, target):
+    print(type(candidates))
+
+    if not candidates:
+        return [[]]
+
+    if target <= 0:
+        return [[]]
+
+    if target < candidates[0]:
+        return [[]]
+
+    if target == candidates[0] and len(candidates) == 1:
+        tmp = []
+        tmp.append(candidates)
+        return tmp
+
+    results = []
+    loop = 0
+    count = int(target/candidates[0])
+    while loop <= count:
+        value = candidates[0]
+        candidates_remain = candidates.pop(0)
+        results = helper(candidates_remain, target-value*loop)
+        print("results", results)
+
+
+        for x in results:
+            for i in range(loop):
+                x.append(value)
+        print("results 2", results)
+
+        loop += 1
+    return results
+
+def combinationSum(candidates, target):
     candidates.sort()
-    divisor_list = []
-    for x in candidates:
-        divisor_list.append(int(target/x))
+    return helper(candidates, target)
 
-    for i in range(len(candidates)):
-        j = 0
-        for j in range(len(divisor_list)):
-            p = 0
-            while p <= divisor_list[j]:
+def leetcode_39_test():
+    l = [3,4,5]
+    target = 10
+    combinationSum(l,target)
 
 """
+
+
+def my_clustering(k = 4):
+    point_list = []
+    for i in range(200):
+        j = 0
+        point = []
+        while j <= 1:
+            point.append(random.uniform(0, 100))
+            j += 1
+        point_list.append(point)
+    k_points = []
+    for i in range(k):
+        k_points.append(point_list[random.randint(0, 19)])
+    #print("original list:", point_list)
+    transpose_k = np.array(k_points).T
+    for i in range(len(point_list)):
+        distance = ( (transpose_k[0] - point_list[i][0]) ** 2 + (transpose_k[1] - point_list[i][1]) ** 2) ** 0.5
+        closest_idx = np.argmin(distance)
+        # closest_idx is under class numpy.int64
+        point_list[i].append(closest_idx)
+    print(point_list)
+
+    #print(k_points)
+    loop = 0
+    while loop < 100:
+
+        for i in range(len(k_points)):
+            x_value = 0
+            y_value = 0
+            count = 0
+
+            for j in range(len(point_list)):
+                if point_list[j][2] == i:
+                    x_value += point_list[j][0]
+                    y_value += point_list[j][1]
+                    count += 1
+            if count != 0:
+                k_points[i][0] = x_value/count
+                k_points[i][1] = y_value/count
+
+        transpose_k = np.array(k_points).T
+
+        for i in range(len(point_list)):
+            distance = ( (transpose_k[0] - point_list[i][0]) ** 2 + (transpose_k[1] - point_list[i][1]) ** 2) ** 0.5
+            closest_idx = np.argmin(distance)
+            # closest_idx is under class numpy.int64
+            point_list[i][2] = closest_idx
+        loop += 1
+        #print(k_points)
+    return k_points
+
+
+
+
 
 
 if __name__ == '__main__':
-    find_two_points()
+    #find_two_points()
     #print(test())
-
+    #leetcode_39_test()
+    print(my_clustering())
