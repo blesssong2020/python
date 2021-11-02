@@ -151,7 +151,7 @@ class employee_2:
     def change_company_name(cls, new_name):
         cls.company_name = new_name
 
-
+#encapsulation(private),  inheritance ,Polymorphism
 emp1 = employee_2(10000, "Jack")
 emp3 = employee_2(8888, "Jenny")
 print(emp1.company_name)
