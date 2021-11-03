@@ -48,18 +48,18 @@ def find_two_points():
 
 
 
-"""
+
 def helper(candidates, target):
     print(type(candidates))
 
     if not candidates:
-        return [[]]
+        return []
 
     if target <= 0:
-        return [[]]
+        return []
 
     if target < candidates[0]:
-        return [[]]
+        return []
 
     if target == candidates[0] and len(candidates) == 1:
         tmp = []
@@ -67,18 +67,18 @@ def helper(candidates, target):
         return tmp
 
     results = []
+    val = candidates[0]
     loop = 0
-    count = int(target/candidates[0])
-    while loop <= count:
-        value = candidates[0]
-        candidates_remain = candidates.pop(0)
-        results = helper(candidates_remain, target-value*loop)
-        print("results", results)
+    count = int(target/val)
+    candidates.pop(0)
 
+    while loop <= count:
+        results = helper(candidates, target-val*loop)
+        print("results", results)
 
         for x in results:
             for i in range(loop):
-                x.append(value)
+                x.append(val)
         print("results 2", results)
 
         loop += 1
@@ -93,7 +93,7 @@ def leetcode_39_test():
     target = 10
     combinationSum(l,target)
 
-"""
+
 
 
 def my_clustering(k = 4):
@@ -156,3 +156,11 @@ if __name__ == '__main__':
     #print(test())
     #leetcode_39_test()
     print(my_clustering())
+
+
+
+# Homework, 11/02, debug homework from last week, finish rest of clustering methods, HW-3 file
+# using Kmean/svm/naivebayes on text
+# HW-4 SVM lDA Topic model
+
+
