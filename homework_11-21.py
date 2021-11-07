@@ -1,6 +1,6 @@
 #  globals().clear()
 
-s = "}"
+s = "123456"
 def leetcode_20(s):
     my_stack = []
     map = {")" : "(", "]" : "[", "}": "{"}
@@ -39,4 +39,38 @@ def my_leetcode_20_2(s):
             return False
     return my_stack.isEmpty()
 
-print(my_leetcode_20_2(s))
+
+
+
+def reverse_str(s):
+    my_stack = Stack()
+    for x in s:
+        my_stack.push(x)
+
+    new_str = ""
+    while not my_stack.isEmpty():
+        new_str += my_stack.peek()
+        my_stack.pop()
+    return new_str
+
+x = 10000
+def dec_to_bin(x, k):
+    my_stack = Stack()
+    if x == 0:
+        return 0
+
+    while x:
+        my_stack.push(x % k)
+        x = int(x/k)
+
+    my_result = []
+    #map = {0:"0", 1:"0", 2:"2", 3:"3", 4:"4", 5:"5", 6:"6", 7:"7"}
+    l = [0,1,2,3,4,5,6,7,8,9,"a","b","c","d","e","f"]
+    print(map)
+    while not my_stack.isEmpty():
+        my_result.append(str(l[my_stack.peek()]))
+        my_stack.pop()
+
+    return my_result
+
+print(dec_to_bin(x, 16))
