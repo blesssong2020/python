@@ -1,6 +1,6 @@
 #  globals().clear()
 
-s = "([])"
+s = "}"
 def leetcode_20(s):
     my_stack = []
     map = {")" : "(", "]" : "[", "}": "{"}
@@ -25,5 +25,18 @@ def leetcode_20(s):
 
     return my_stack == []
 
-print(leetcode_20(s))
+from my_stack_class import Stack
 
+def my_leetcode_20_2(s):
+    my_stack = Stack()
+    map = {")" : "(", "]" : "[", "}": "{"}
+    for x in s:
+        if x in ["(", "[", "{"]:
+            my_stack.push(x)
+        elif my_stack.peek() == map[x]:
+            my_stack.pop()
+        else:
+            return False
+    return my_stack.isEmpty()
+
+print(my_leetcode_20_2(s))
