@@ -74,3 +74,7 @@ def dec_to_bin(x, k):
     return my_result
 
 print(dec_to_bin(x, 16))
+
+
+class MaxStack:
+    def __init__(self):
