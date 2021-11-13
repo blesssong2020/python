@@ -30,7 +30,7 @@ class LinkedList:
     def printList(self):
         curr_node = self.head
         print_list = []
-        while curr_node != None:
+        while curr_node:
             print_list.append(curr_node.data)
             curr_node = curr_node.next
         print(print_list)
@@ -99,6 +99,68 @@ class LinkedList:
         prev_node.next = curr_node.next
         curr_node = None
 
+    def remove_duplicate(self):
+        my_dict = {}
+        prev_node = None
+        curr_node = self.head
+        while curr_node:
+            if curr_node.data not in my_dict:
+                my_dict[curr_node.data] = 1
+                prev_node = curr_node
+                #curr_node = prev_node.next
+            else:
+                prev_node.next = curr_node.next
+                curr_node = None
+                #curr_node = prev_node.next
+            curr_node = prev_node.next
+
+    def swap(self, k1, k2):
+        if k1 == k2:
+            return
+
+        k1_prev_node = None
+        k1_curr_node = self.head
+        while k1_curr_node and k1_curr_node.data != k1:
+            k1_prev_node = k1_curr_node
+            k1_curr_node = k1_curr_node.next
+
+        k2_prev_node = None
+        k2_curr_node = self.head
+        while k2_curr_node and k2_curr_node.data != k2:
+            k2_prev_node = k2_curr_node
+            k2_curr_node = k2_curr_node.next
+
+        if not k1_curr_node or not k2_curr_node:
+            return
+
+        if k1_prev_node:
+            k1_prev_node.next = k2_curr_node
+        else:
+            self.head = k2_curr_node
+
+        if k2_prev_node:
+            k2_prev_node.next = k1_curr_node
+        else:
+            self.head = k1_curr_node
+
+        k1_curr_node.next, k2_curr_node.next = k2_curr_node.next, k1_curr_node.next
+
+    def reverse(self):
+        prev_node = None
+        curr_node = self.head
+        next_node = None
+        while curr_node:
+            next_node = curr_node.next
+            curr_node.next = prev_node
+            prev_node = curr_node
+            curr_node = next_node
+
+        self.head = prev_node
+
+
+
+
+
 
 
 
@@ -107,20 +169,14 @@ class LinkedList:
 
 def test_myList():
     list_1 = LinkedList()
+    list_1.append(5)
+    list_1.append(4)
     list_1.append(3)
-    list_1.append(2)
-    list_1.append(1)
-    list_1.prepend(0)
+    list_1.prepend(1)
+    list_1.append(10)
     list_1.printList()
-    node_2 = list_1.get_node(3)
-    print(node_2.data)
-    list_1.insert(node_2, 10)
+    list_1.reverse()
     list_1.printList()
-    list_1.deletion(20)
-    list_1.printList()
-    list_1.delete_pos(2)
-    list_1.printList()
-    print(list_1.list_len_rec(list_1.get_node(100)))
 
 
 test_myList()
