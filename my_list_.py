@@ -171,6 +171,40 @@ class LinkedList:
 
         self.head = helper(None, self.head)
 
+    def merge(self, list):
+        curr1 = self.head
+        curr2 = list.head
+        node = None
+        new_head = None
+        if not curr1:
+            return curr2
+        if not curr2:
+            return curr1
+
+        if curr1.data <= curr2.data:
+            new_head = curr1
+            curr1 = curr1.next
+        else:
+            new_head = curr2
+            curr2 = curr2.next
+
+        node = new_head
+        while curr1 and curr2:
+            if curr1.data <= curr2.data:
+                node.next = curr1
+                curr1 = curr1.next
+            else:
+                node.next = curr2
+                curr2 = curr2.next
+            node = node.next
+
+        if not curr2:
+            node.next = curr1
+        else:
+            node.next = curr2
+        self.head = new_head
+        return self.head
+
 
 
 
@@ -183,16 +217,20 @@ class LinkedList:
 
 def test_myList():
     list_1 = LinkedList()
-    list_1.append(5)
-    list_1.append(4)
+    list_2 = LinkedList()
+    list_1.append(1)
     list_1.append(3)
-    list_1.prepend(1)
+    list_1.append(4)
+    list_1.append(5)
     list_1.append(10)
-    list_1.append(2000)
     list_1.printList()
-    list_1.reverse_recursive()
+    list_2.append(2)
+    list_2.append(7)
+    list_2.append(9)
+    list_2.append(20)
+    list_2.printList()
+    list_1.merge(list_2)
     list_1.printList()
-
 
 test_myList()
 
