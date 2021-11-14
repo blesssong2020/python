@@ -157,6 +157,20 @@ class LinkedList:
 
         self.head = prev_node
 
+    def reverse_recursive(self):
+        def helper(prev, curr):
+            if not curr:
+                return prev
+
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+
+            return helper(prev, curr)
+
+        self.head = helper(None, self.head)
+
 
 
 
@@ -174,8 +188,9 @@ def test_myList():
     list_1.append(3)
     list_1.prepend(1)
     list_1.append(10)
+    list_1.append(2000)
     list_1.printList()
-    list_1.reverse()
+    list_1.reverse_recursive()
     list_1.printList()
 
 
