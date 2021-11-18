@@ -83,6 +83,14 @@ class LinkedList:
             prev_node.next = curr_node.next
             curr_node = None
 
+    def get_last_node(self):
+        if not self.head:
+            return None
+        curr_node = self.head
+        while curr_node.next:
+            curr_node = curr_node.next
+        return curr_node
+
     def delete_pos(self, pos):
         length = self.listLength()
         if pos >= length:
@@ -205,6 +213,92 @@ class LinkedList:
         self.head = new_head
         return self.head
 
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if self.head == None:
+            self.head = new_node
+            new_node.next = self.head
+            return
+
+        curr_node = self.head
+        while curr_node.next != self.head:
+            curr_node = curr_node.next
+        curr_node.next = new_node
+        new_node.next = self.head
+
+    def printList(self):
+        my_list = []
+        curr_node = self.head
+        while curr_node:
+            my_list.append(curr_node.data)
+            curr_node = curr_node.next
+            if curr_node == self.head:
+                break
+        print(my_list)
+
+    def prepend(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            new_node.next = self.head
+            return
+
+        curr_node = self.head
+        while curr_node.next != self.head:
+            curr_node = curr_node.next
+        curr_node.next = new_node
+        new_node.next = self.head
+
+        self.head = new_node
+
+    def get_last_node(self):
+        if not self.head:
+            return None
+        curr_node = self.head
+        while curr_node.next != self.head:
+            curr_node = curr_node.next
+        return curr_node
+
+    def delete(self, key):
+        if not self.head:
+            return
+        prev_node = None
+        curr_node = self.head
+        if self.head.data == key:
+            last_node = self.get_last_node()
+            if last_node == self.head:
+                self.head = None
+                return
+
+            last_node.next = self.head.next
+            self.head = None
+            self.head = last_node.next
+            return
+
+        while curr_node != self.head:
+            if curr_node.data == key:
+                prev_node.next = curr_node.next
+                curr_node = None
+                return
+            prev_node = curr_node
+            curr_node = curr_node.next
+
+        if curr_node.data == key:
+            prev_node.next = curr_node.next
+            curr_node = None
+
+def isa_circular_list(list):
+    curr_node = list.head
+    while curr_node:
+        if curr_node.next == list.head:
+            return True
+        curr_node = curr_node.next
+    return False
+
 
 
 
@@ -229,9 +323,28 @@ def test_myList():
     list_2.append(9)
     list_2.append(20)
     list_2.printList()
-    list_1.merge(list_2)
+    list_1.get_last_node().next
+
+def test_2():
+    cl_2 = CircularLinkedList()
+    cl_2.append(2)
+    cl_2.append(10)
+    cl_2.append(100)
+    cl_2.prepend(222)
+    cl_2.prepend(444)
+    cl_2.printList()
+    #cl_2.get_last_node().next.next.data
+    #print("AAA")
+    cl_2.delete(100000)
+    list_1 = LinkedList()
+    list_1.append(10)
+    list_1.append(888)
     list_1.printList()
+    #print("BBB")
+    print(isa_circular_list(list_1))
 
-test_myList()
+
+test_2()
 
 
+homework 876/142
