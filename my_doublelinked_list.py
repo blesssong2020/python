@@ -123,7 +123,20 @@ class DLL:
                 return
             curr_node = curr_node.next
 
+    def reverse(self):
+        if not self.head or not self.head.next:
+            return
 
+        curr_node = self.head
+        while curr_node:
+            next_node = curr_node.next
+            prev_node = curr_node.prev
+
+            curr_node.prev = next_node
+            curr_node.next = prev_node
+
+            self.head = curr_node
+            curr_node = next_node
 
 
 
@@ -140,12 +153,16 @@ def test():
     d_2 = DLL()
     d_2.append(7)
     d_2.append(10)
-    node1 = d_1.get_node(10)
-    print(node1)
-    node2 = d_2.get_node(10)
-    print(node2)
-    print(node1 == node2)
+    #node1 = d_1.get_node(10)
+    #print(node1)
+    #node2 = d_2.get_node(10)
+    #print(node2)
+    #print(node1 == node2)
     #d_1.delete_node(d_2.get_node(10))
+    d_1.reverse()
+    d_3 = DLL()
+    d_3.reverse()
+    d_3.printList()
     d_1.printList()
 
 if __name__ == '__main__':
