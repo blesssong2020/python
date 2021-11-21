@@ -72,6 +72,56 @@ class DLL:
             else:
                 curr_node = curr_node.next
 
+    def delete(self, key):
+        curr_node = self.head
+        if self.head.data == key:
+            self.head = curr_node.next
+            curr_node = None
+            return
+        while curr_node:
+            if curr_node.data == key:
+                if not curr_node.next:
+                    prev_node = curr_node.prev
+                    prev_node.next = None
+                    curr_node = None
+                    return
+                prev_node = curr_node.prev
+                next_node = curr_node.next
+                next_node.prev = prev_node
+                prev_node.next = next_node
+                curr_node = None
+                return
+            curr_node = curr_node.next
+
+    def get_node(self, data):
+        curr_node = self.head
+        while curr_node:
+            if curr_node.data == data:
+                return curr_node
+            curr_node = curr_node.next
+        return None
+
+    def delete_node(self, node):
+        curr_node = self.head
+        if self.head == node:
+            self.head = curr_node.next
+            curr_node = None
+            return
+
+        while curr_node:
+            if curr_node == node:
+                if not curr_node.next:
+                    prev_node = curr_node.prev
+                    prev_node.next = None
+                    curr_node = None
+                    return
+                prev_node = curr_node.prev
+                next_node = curr_node.next
+                next_node.prev = prev_node
+                prev_node.next = next_node
+                curr_node = None
+                return
+            curr_node = curr_node.next
 
 
 
@@ -87,8 +137,15 @@ def test():
     d_1.prepend(8)
     d_1.prepend(5)
     d_1.printList()
-    d_1.insert_before(5,19)
-    d_1.insert_before(10,18)
+    d_2 = DLL()
+    d_2.append(7)
+    d_2.append(10)
+    node1 = d_1.get_node(10)
+    print(node1)
+    node2 = d_2.get_node(10)
+    print(node2)
+    print(node1 == node2)
+    #d_1.delete_node(d_2.get_node(10))
     d_1.printList()
 
 if __name__ == '__main__':
