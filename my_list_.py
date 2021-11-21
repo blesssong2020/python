@@ -267,7 +267,7 @@ class CircularLinkedList:
         if not self.head:
             return
         prev_node = None
-        curr_node = self.head
+
         if self.head.data == key:
             last_node = self.get_last_node()
             if last_node == self.head:
@@ -279,6 +279,8 @@ class CircularLinkedList:
             self.head = last_node.next
             return
 
+        prev_node = self.head
+        curr_node = self.head.next
         while curr_node != self.head:
             if curr_node.data == key:
                 prev_node.next = curr_node.next
@@ -298,6 +300,7 @@ def isa_circular_list(list):
             return True
         curr_node = curr_node.next
     return False
+
 
 
 
@@ -335,16 +338,13 @@ def test_2():
     cl_2.printList()
     #cl_2.get_last_node().next.next.data
     #print("AAA")
-    cl_2.delete(100000)
-    list_1 = LinkedList()
-    list_1.append(10)
-    list_1.append(888)
-    list_1.printList()
-    #print("BBB")
-    print(isa_circular_list(list_1))
+    cl_2.delete(222)
+    cl_2.printList()
+    pass
+
 
 
 test_2()
 
 
-homework 876/142
+
