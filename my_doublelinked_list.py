@@ -138,6 +138,16 @@ class DLL:
             self.head = curr_node
             curr_node = next_node
 
+    def remove_duplicate(self):
+        my_dict = {}
+        curr_node = self.head
+
+        while curr_node:
+            if curr_node.data not in my_dict:
+                my_dict.update({curr_node.data:0})
+            else:
+                self.delete_node(curr_node)
+            curr_node = curr_node.next
 
 
 
@@ -149,20 +159,24 @@ def test():
     d_1.append(10)
     d_1.prepend(8)
     d_1.prepend(5)
-    d_1.printList()
     d_2 = DLL()
     d_2.append(7)
     d_2.append(10)
+    d_1.append(10)
+    d_1.append(7)
+    for i in range(100):
+        d_1.append(10)
     #node1 = d_1.get_node(10)
     #print(node1)
     #node2 = d_2.get_node(10)
     #print(node2)
     #print(node1 == node2)
     #d_1.delete_node(d_2.get_node(10))
-    d_1.reverse()
     d_3 = DLL()
     d_3.reverse()
     d_3.printList()
+    d_1.printList()
+    d_1.remove_duplicate()
     d_1.printList()
 
 if __name__ == '__main__':
