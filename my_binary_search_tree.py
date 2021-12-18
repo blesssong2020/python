@@ -10,6 +10,40 @@ class Node:
         self.left = None
         self.right = None
 
+class Node3:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.mid = None
+        self.right = None
+class Tri_Tree:
+    def __init__(self, node):
+        self.root = node
+
+    def in_order(self, curr_node, result = []):
+        if not curr_node:
+            return result
+        result = self.in_order(curr_node.left, result)
+        result.append(curr_node.data)
+        result = self.in_order(curr_node.mid, result)
+        result = self.in_order(curr_node.right, result)
+        return result
+
+
+def test_tri():
+    root = Node3(8)
+    root.left = Node3(1)
+    root.mid = Node3(4)
+    root.right = Node3(7)
+    root.left.left = Node3(15)
+    root.left.right = Node3(2)
+    root.right.left = Node3(20)
+    root.right.mid = Node3(9)
+    root.right.right = Node3(19)
+    tree = Tri_Tree(root)
+    print(tree.in_order(root))
+test_tri()
+
 #binary search tree, left<root<right
 class BST:
     def __init__(self, root):
@@ -450,5 +484,5 @@ def test_tree():
     print(tree_2.in_order_print(root))
 
 
-test_tree()
+#test_tree()
 
