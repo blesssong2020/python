@@ -1,109 +1,122 @@
+class HashEntry:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.next = None
+
 class HashTable:
-     # Create empty bucket list of given size
-    def __init__(self, size):
-        self.size = size
-        self.hash_table = self.create_buckets()
+    def __init__(self):
+        self.slots = 10
+        self.size = 0
+        self.bucket = [None]*self.slots
+        self.occupation_rate = 0.1
 
-    def create_buckets(self):
-        return [[] for _ in range(self.size)]
+    def get_size(self):
+        return self.size
 
-    # Insert values into hash map
-    def set_val(self, key, val):
+    def double_size(self):
+        print('double hash table size')
+        new_slots = self.slots * 2
+        new_bucket = [None] * new_slots
+        new_size = 0
+        for x in self.bucket:
+            while x:
+                new_index = hash(x.key) % new_slots
+                if new_bucket[new_index] is None:
+                    new_bucket[new_index] = HashEntry(x.key, x.value)
+                    new_size += 1
+                else:
+                    head = new_bucket[new_index]
+                    while head:
+                        if head.key == x.key:
+                            head.value = x.value
+                            break
+                        elif head.next is None:
+                            head.next = HashEntry(x.key, x.value)
+                            break
+                        else:
+                            head = head.next
+                x = x.next
+        self.size = new_size
+        self.bucket = new_bucket
+        self.slots = new_slots
+        print('new slots size', self.slots)
 
-        # Get the index from the key
-        # using hash function
-        hashed_key = hash(key) % self.size
-
-        # Get the bucket corresponding to index
-        bucket = self.hash_table[hashed_key]
-
-        found_key = False
-        for index, record in enumerate(bucket):
-            record_key, record_val = record
-
-            # check if the bucket has same key as
-            # the key to be inserted
-            if record_key == key:
-                found_key = True
-                break
-
-        # If the bucket has same key as the key to be inserted,
-        # Update the key value
-        # Otherwise append the new key-value pair to the bucket
-        if found_key:
-            bucket[index] = (key, val)
+    def remove(self, key):
+        index = self.get_index(key)
+        head = self.bucket[index]
+        if not head:
+            print('key does not exist, 1')
+            return
+        prev = head
+        if prev.key == key:
+            head = None
+            self.bucket[index] = prev.next
         else:
-            bucket.append((key, val))
+            head = head.next
+            flag = False
+            while head:
+                if head.key == key:
+                    prev.next = head.next
+                    head = None
+                    flag = True
+                    break
+                else:
+                    head = head.next
+                    prev = prev.next
+            if not flag:
+                print('key does not exist, 2')
+        if self.bucket[index] is None:
+            self.size -= 1
+            return
 
-    # Return searched value with specific key
-    def get_val(self, key):
 
-        # Get the index from the key using
-        # hash function
-        hashed_key = hash(key) % self.size
+    def isEmpty(self):
+        return self.size == 0
 
-        # Get the bucket corresponding to index
-        bucket = self.hash_table[hashed_key]
+    def get_index(self, key):
+        hash_value = hash(key)
+        return hash_value % self.slots
 
-        found_key = False
-        for index, record in enumerate(bucket):
-            record_key, record_val = record
-
-            # check if the bucket has same key as
-            # the key being searched
-            if record_key == key:
-                found_key = True
-                break
-
-        # If the bucket has same key as the key being searched,
-        # Return the value found
-        # Otherwise indicate there was no record found
-        if found_key:
-            return record_val
+    def insert(self, key, value):
+        index = self.get_index(key)
+        if not self.bucket[index]:
+            self.bucket[index] = HashEntry(key, value)
+            self.size += 1
+            if float(self.size)/self.slots > self.occupation_rate:
+                self.double_size()
         else:
-            return "No record found"
+            head = self.bucket[index]
+            while head:
+                if head.key == key:
+                    head.value = value
+                    break
+                elif head.next == None:
+                    head.next = HashEntry(key, value)
+                    break
+                else:
+                    head = head.next
 
-    # Remove a value with specific key
-    def delete_val(self, key):
-
-        # Get the index from the key using
-        # hash function
-        hashed_key = hash(key) % self.size
-
-        # Get the bucket corresponding to index
-        bucket = self.hash_table[hashed_key]
-
-        found_key = False
-        for index, record in enumerate(bucket):
-            record_key, record_val = record
-
-            # check if the bucket has same key as
-            # the key to be deleted
-            if record_key == key:
-                found_key = True
-                break
-        if found_key:
-            bucket.pop(index)
-        return
-
-    def __str__(self):
-        return "".join(str(item) for item in self.hash_table)
+    def get_value(self, key):
+        index = self.get_index(key)
+        if not self.bucket[index]:
+            return None
+        head = self.bucket[index]
+        while head:
+            if head.key == key:
+                return head.value
+            else:
+                head = head.next
+        return None
 
 def test():
-    hash_table = HashTable(50)
-    hash_table.set_val('gfg@example.com', 'some value')
-    print(hash_table)
-    print()
+    my_hash = HashTable()
+    my_hash.insert(10.2, 10)
+    my_hash.insert(10.3, 100)
+    my_hash.insert(1.2, 5)
+    my_hash.remove(10.2)
+    my_hash.remove(999.9)
+    print(my_hash.get_size())
 
-    hash_table.set_val('portal@example.com', 'some other value')
-    print(hash_table)
-    print()
 
-# search/access a record with key
-    print(hash_table.get_val('portal@example.com'))
-    print()
-
-# delete or remove a value
-    hash_table.delete_val('portal@example.com')
-    print(hash_table)
 test()

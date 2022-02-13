@@ -1,6 +1,8 @@
 #
 import random
 import time
+from collections import deque
+
 #random.seed(9)
 def generate_int():
     count = 0
@@ -44,6 +46,12 @@ def test():
     #print(data)
     #print(find_k_second_attempt(data, 5))
     print(find_kth_largest(data, 5))
+
+def test_stack():
+    stack = [3,4,5]
+
+
+
 
 if __name__ == "__main__":
     test()

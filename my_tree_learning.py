@@ -183,10 +183,6 @@ class Binary_Tree:
     """
     class Solution(object):
     def levelOrderBottom(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
         result = []
         if not root:
             return result
@@ -224,8 +220,6 @@ class Binary_Tree:
         root = node
         if not root:
             return 0
-        if root and root.left == None and root.right == None:
-            return 1
         left_height = self.height(node.left)
         right_height = self.height(node.right)
         return 1 + max(left_height, right_height)
@@ -247,6 +241,16 @@ class Binary_Tree:
                 my_stack.push(node.right)
         return count
 
+
+def fib(n):
+    my_list = [0,1]
+    if n < 2:
+        return my_list[n]
+    for i in range(2,n+1):
+        my_list.append( my_list[i-1] + my_list[i-2] )
+    return my_list[-1]
+
+print(fib(100))
 
 def test_tree():
     #root = Node(8)
@@ -287,11 +291,11 @@ def test_tree():
     root_3.left.right = Node(5)
     root_3.right.left = Node(6)
     root_3.right.right = Node(7)
-    print(tree_3.post_order_stack_print_2())
+    #print(tree_3.post_order_stack_print_2())
     print(tree_2.post_order_stack_print_3())
     print(tree_2.level_print())
     print(tree_2.in_order_print(root))
-    print(tree_2.level_print_2())
+    print(tree_2.height(tree_2.root))
 
-test_tree()
+#test_tree()
 

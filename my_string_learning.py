@@ -106,26 +106,7 @@ def leet_125(s):
             return False
     return True
 
-def leet_443(s):
-    new_string = ""
-    new_list = []
-    i = 0
-    while i < len(s):
-        temp = 1
-        current_str = s[i]
-        while i+1 < len(s) and current_str == s[i+1]:
-            temp += 1
-            i += 1
-        i += 1
-        if temp > 1:
-            new_string = new_string + current_str + str(temp)
-        else:
-            new_string = new_string + current_str
-    for x in new_string:
-        new_list.append(x)
-    return len(new_list), new_list
-
-def leet_443_2(l):
+def leet_443(l):
     new_list = []
     i = 0
     new_str = ""
@@ -143,7 +124,8 @@ def leet_443_2(l):
             new_list.append(current_element)
     for x in new_list:
         new_str += x
-    l = list(new_str)
+    l.clear()
+    l.extend(list(new_str))
     return len(l)
 
 def leetcode443_correct(chars):

@@ -50,8 +50,6 @@ def find_two_points():
 
 
 def helper(candidates, target):
-    print(type(candidates))
-
     if not candidates:
         return []
 
@@ -155,7 +153,7 @@ if __name__ == '__main__':
     #find_two_points()
     #print(test())
     #leetcode_39_test()
-    print(my_clustering())
+    #print(my_clustering())
 
 
 

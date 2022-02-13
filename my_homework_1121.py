@@ -78,3 +78,56 @@ print(dec_to_bin(x, 16))
 
 class MaxStack:
     def __init__(self):
+        self.data = []
+
+    def push(self, val):
+        self.data.append(val)
+
+    def pop(self):
+        self.data.pop(-1)
+
+    def top(self):
+        if self.data:
+            return self.data[-1]
+
+    def peekMax(self):
+        if self.data:
+            return max(self.data)
+        else:
+            print("stack is empty")
+
+    def popMax(self):
+        if self.data:
+            return max(self.data).pop(-1)
+        else:
+            print("stack is empty")
+
+def leetcode_876_middleNode(self, head):
+
+    curr_node = head
+    count = 0
+    while curr_node:
+        count += 1
+        curr_node = curr_node.next
+
+
+    curr_node = head
+    for i in range(int(round(count/2))):
+        curr_node = curr_node.next
+
+    return curr_node
+
+def leetcode_142_detectCycle(self, head):
+
+    my_list = []
+    curr_node = head
+    count = 0
+    if not curr_node or not curr_node.next:
+        return None
+
+    while curr_node.next and curr_node.next not in my_list:
+        my_list.append(curr_node)
+        count += 1
+        curr_node = curr_node.next
+
+    return curr_node.next

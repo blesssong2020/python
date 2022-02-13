@@ -149,7 +149,7 @@ class DLL:
                 self.delete_node(curr_node)
             curr_node = curr_node.next
 
-
+# list [5,8,7,1,10] sum combination no duplicate
 
 
 def test():
@@ -164,20 +164,47 @@ def test():
     d_2.append(10)
     d_1.append(10)
     d_1.append(7)
-    for i in range(100):
-        d_1.append(10)
     #node1 = d_1.get_node(10)
     #print(node1)
     #node2 = d_2.get_node(10)
     #print(node2)
     #print(node1 == node2)
     #d_1.delete_node(d_2.get_node(10))
-    d_3 = DLL()
-    d_3.reverse()
-    d_3.printList()
-    d_1.printList()
     d_1.remove_duplicate()
+    print("candi")
     d_1.printList()
 
-if __name__ == '__main__':
-    test()
+#if __name__ == '__main__':
+    #test()
+
+
+test_dll = DLL()
+test_dll.append(5)
+test_dll.append(8)
+test_dll.append(7)
+test_dll.append(1)
+test_dll.append(10)
+result = []
+def combination_sum_linkedlist(target, combination, curr_node = test_dll.head):
+    if target == 0:
+        result.append(list(combination))
+        return
+
+    if target < 0:
+        return
+
+    while curr_node:
+        combination.append(curr_node.data)
+        print(combination)
+        combination_sum_linkedlist(target - curr_node.data, combination, curr_node)
+        combination.pop()
+        curr_node = curr_node.next
+
+def test_result():
+    combination_sum_linkedlist(10, [])
+    print(result)
+    print(len(result), "length")
+
+test_result()
+
+
