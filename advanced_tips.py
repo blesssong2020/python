@@ -1,5 +1,6 @@
 # list comprehension
 from functools import reduce
+import re
 def practice_1(l):
     my_list = []
     for i, e in enumerate(l):
@@ -45,9 +46,12 @@ def practice_3():
 
     #for i, cont in enumerate(content_list):
         #print(i,cont)
-    my_filter = filter(lambda x: "system" in x, content_list)
-    content_wth_system = list(my_filter)
-    for i, cont in enumerate(content_wth_system):
-        print(i,cont)
+    #my_filter = filter(lambda x: "system" in x, content_list)
+    #content_wth_system = list(my_filter)
+    for i, x in enumerate(content_list):
+        z = re.search(r"[Ss][Oo].*\d{5}]:", x)
+        #print(x)
+        if z:
+            print(i, x)
 
 practice_3()
