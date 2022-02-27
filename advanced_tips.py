@@ -37,4 +37,17 @@ def practice_2(s):
 
 
 #print("".join(practice_2("ARCHER193&*%()")))
-print(practice_2("ARCHER193&*%()"))
+#print(practice_2("ARCHER193&*%()"))
+def practice_3():
+    my_file = open("install.log", "r")
+    content = my_file.read()
+    content_list = content.split('\n')
+
+    #for i, cont in enumerate(content_list):
+        #print(i,cont)
+    my_filter = filter(lambda x: "system" in x, content_list)
+    content_wth_system = list(my_filter)
+    for i, cont in enumerate(content_wth_system):
+        print(i,cont)
+
+practice_3()
