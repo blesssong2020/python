@@ -27,4 +27,14 @@ def map_reduce(s):
     return my_res
 
 
-print(map_reduce("12356"))
+#print(map_reduce("12356"))
+
+def practice_2(s):
+    my_filter = filter(lambda x: x.isalpha(), s)
+    my_map = map(lambda x: x.lower(), my_filter)
+    my_reduce = reduce(lambda x,y: x + y, my_map)
+    return my_reduce
+
+
+#print("".join(practice_2("ARCHER193&*%()")))
+print(practice_2("ARCHER193&*%()"))
