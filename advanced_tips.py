@@ -54,4 +54,48 @@ def practice_3():
         if z:
             print(i, x)
 
-practice_3()
+#practice_3()
+# find all lines start with 1 or more tab/space followed by word "student", in all files ends with ".py"
+# then save the result into result.txt
+#grep -nri "^\s*student" *.py > result.txt
+# ls -ltr *
+
+
+
+#parser
+import argparse
+
+parser = argparse.ArgumentParser(description="process some integer")
+#parser.add_argument('-n', '--name', required=True, type=str, help='name which is going to be used.')
+#parser.add_argument('-a', '--age', required=True, type=int, help='age which is going to be used.')
+#parser.add_argument('-s', '--sex', default="female", type=str,choices=['male','female'], help='sex which is going to be used.')
+#parser.add_argument('-t', '--teacher', action="store_true", help='student or teacher.')
+#my_args = parser.parse_args()
+parser.add_argument('-f', '--file', required=True, help='student or teacher.')
+my_args = parser.parse_args()
+
+def foo(args):
+    print("my foo function say hello to %s", args.name)
+    print("my age", args.age)
+    print("my sex", args.sex)
+    print("identity is a teacher", args.teacher)
+
+def open_file(path):
+    my_file = open(path)
+    lines = my_file.readlines()
+    for line in lines:
+        print(line)
+
+
+
+
+
+
+if __name__ == "__main__":
+    #foo(my_args)
+    open_file(my_args.file)
+
+
+
+
+#homework: read one file and store into another file
